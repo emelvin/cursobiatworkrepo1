@@ -1,0 +1,9 @@
+{
+	"name": "cursobiatworkdf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ed59c266-0bf9-4183-a31a-e65df5c7709e",
+		"tenantId": "a77a7a5a-e870-4855-82ff-f6c1037880a2"
+	}
+}
