@@ -1,0 +1,99 @@
+{
+	"name": "input_biatwork_bolsa_empleo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blobbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "job_descriptions.csv",
+				"container": "cursobiatworkcontainer"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "String"
+			},
+			{
+				"name": "EXPERIENCIA_MINIMA",
+				"type": "String"
+			},
+			{
+				"name": "EXPERIENCIA_MAXIMA",
+				"type": "String"
+			},
+			{
+				"name": "TITULACION",
+				"type": "String"
+			},
+			{
+				"name": "RANGO_SALARIAL_MINIMO",
+				"type": "String"
+			},
+			{
+				"name": "RANGO_SALARIAL_MAXIMO",
+				"type": "String"
+			},
+			{
+				"name": "UBICACIÓN",
+				"type": "String"
+			},
+			{
+				"name": "PAIS",
+				"type": "String"
+			},
+			{
+				"name": "TIPO_EMPLEO",
+				"type": "String"
+			},
+			{
+				"name": "TAMAÑO_COMPAÑIA",
+				"type": "String"
+			},
+			{
+				"name": "FECHA_PUBLICACION",
+				"type": "String"
+			},
+			{
+				"name": "GENERO",
+				"type": "String"
+			},
+			{
+				"name": "CONTACTO_NOMBRE",
+				"type": "String"
+			},
+			{
+				"name": "CONTACTO_NUMERO",
+				"type": "String"
+			},
+			{
+				"name": "TITULO_EMPLEO",
+				"type": "String"
+			},
+			{
+				"name": "ROL",
+				"type": "String"
+			},
+			{
+				"name": "PORTAL_EMPLEO",
+				"type": "String"
+			},
+			{
+				"name": "EMPRESA",
+				"type": "String"
+			}
+		]
+	}
+}
