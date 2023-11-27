@@ -1,0 +1,29 @@
+{
+	"name": "output_portal_empleo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Origen"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PORTAL_EMPLEO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PORTAL_EMPLEO_NOMBRE",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_PORTAL_EMPLEO"
+		}
+	}
+}

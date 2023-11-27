@@ -1,0 +1,29 @@
+{
+	"name": "output_tipo_empleo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Origen"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "TIPO_EMPLEO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TIPO_EMPLEO_DESCRIPCION",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_TIPO_EMPLEO"
+		}
+	}
+}
