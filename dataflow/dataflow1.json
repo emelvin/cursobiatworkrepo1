@@ -5,14 +5,46 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"name": "source1"
+					"dataset": {
+						"referenceName": "Origen_biatwork_bolsa_empleo",
+						"type": "DatasetReference"
+					},
+					"name": "OrigenBolsaEmpleo"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "aggContacto"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1"
+				"source(output(",
+				"          id as string,",
+				"          EXPERIENCIA_MINIMA as string,",
+				"          EXPERIENCIA_MAXIMA as string,",
+				"          TITULACION as string,",
+				"          RANGO_SALARIAL_MINIMO as string,",
+				"          RANGO_SALARIAL_MAXIMO as string,",
+				"          {UBICACIÓN} as string,",
+				"          PAIS as string,",
+				"          TIPO_EMPLEO as string,",
+				"          {TAMAÑO_COMPAÑIA} as string,",
+				"          FECHA_PUBLICACION as string,",
+				"          GENERO as string,",
+				"          CONTACTO_NOMBRE as string,",
+				"          CONTACTO_NUMERO as string,",
+				"          TITULO_EMPLEO as string,",
+				"          ROL as string,",
+				"          PORTAL_EMPLEO as string,",
+				"          EMPRESA as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> OrigenBolsaEmpleo",
+				"OrigenBolsaEmpleo aggregate(groupBy(CONTACTO_NOMBRE,",
+				"          CONTACTO_NUMERO),",
+				"     registro = countDistinct(CONTACTO_ID)) ~> aggContacto"
 			]
 		}
 	}
