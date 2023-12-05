@@ -49,110 +49,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Origen_biatwork_bolsa_empleo')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "blobbiatwork",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "Origen CSV"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "job_descriptions.csv",
-						"container": "cursobiatworkcontainer"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "id",
-						"type": "String"
-					},
-					{
-						"name": "EXPERIENCIA_MINIMA",
-						"type": "String"
-					},
-					{
-						"name": "EXPERIENCIA_MAXIMA",
-						"type": "String"
-					},
-					{
-						"name": "TITULACION",
-						"type": "String"
-					},
-					{
-						"name": "RANGO_SALARIAL_MINIMO",
-						"type": "String"
-					},
-					{
-						"name": "RANGO_SALARIAL_MAXIMO",
-						"type": "String"
-					},
-					{
-						"name": "UBICACIÓN",
-						"type": "String"
-					},
-					{
-						"name": "PAIS",
-						"type": "String"
-					},
-					{
-						"name": "TIPO_EMPLEO",
-						"type": "String"
-					},
-					{
-						"name": "TAMAÑO_COMPAÑIA",
-						"type": "String"
-					},
-					{
-						"name": "FECHA_PUBLICACION",
-						"type": "String"
-					},
-					{
-						"name": "GENERO",
-						"type": "String"
-					},
-					{
-						"name": "CONTACTO_NOMBRE",
-						"type": "String"
-					},
-					{
-						"name": "CONTACTO_NUMERO",
-						"type": "String"
-					},
-					{
-						"name": "TITULO_EMPLEO",
-						"type": "String"
-					},
-					{
-						"name": "ROL",
-						"type": "String"
-					},
-					{
-						"name": "PORTAL_EMPLEO",
-						"type": "String"
-					},
-					{
-						"name": "EMPRESA",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/blobbiatwork')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Destino_DIM_CONTACTO')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -729,6 +625,110 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Origen_biatwork_bolsa_empleo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "blobbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Origen CSV"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "job_descriptions.csv",
+						"container": "cursobiatworkcontainer"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "id",
+						"type": "String"
+					},
+					{
+						"name": "EXPERIENCIA_MINIMA",
+						"type": "String"
+					},
+					{
+						"name": "EXPERIENCIA_MAXIMA",
+						"type": "String"
+					},
+					{
+						"name": "TITULACION",
+						"type": "String"
+					},
+					{
+						"name": "RANGO_SALARIAL_MINIMO",
+						"type": "String"
+					},
+					{
+						"name": "RANGO_SALARIAL_MAXIMO",
+						"type": "String"
+					},
+					{
+						"name": "UBICACIÓN",
+						"type": "String"
+					},
+					{
+						"name": "PAIS",
+						"type": "String"
+					},
+					{
+						"name": "TIPO_EMPLEO",
+						"type": "String"
+					},
+					{
+						"name": "TAMAÑO_COMPAÑIA",
+						"type": "String"
+					},
+					{
+						"name": "FECHA_PUBLICACION",
+						"type": "String"
+					},
+					{
+						"name": "GENERO",
+						"type": "String"
+					},
+					{
+						"name": "CONTACTO_NOMBRE",
+						"type": "String"
+					},
+					{
+						"name": "CONTACTO_NUMERO",
+						"type": "String"
+					},
+					{
+						"name": "TITULO_EMPLEO",
+						"type": "String"
+					},
+					{
+						"name": "ROL",
+						"type": "String"
+					},
+					{
+						"name": "PORTAL_EMPLEO",
+						"type": "String"
+					},
+					{
+						"name": "EMPRESA",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/blobbiatwork')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -828,13 +828,6 @@
 								"type": "DatasetReference"
 							},
 							"name": "dimUbicacion"
-						},
-						{
-							"dataset": {
-								"referenceName": "Destino_DIM_FECHA",
-								"type": "DatasetReference"
-							},
-							"name": "dimFecha"
 						}
 					],
 					"transformations": [
@@ -873,9 +866,6 @@
 						},
 						{
 							"name": "aggUbicacion"
-						},
-						{
-							"name": "aggFecha"
 						}
 					],
 					"scriptLines": [
@@ -932,8 +922,6 @@
 						"     registros = countDistinct(TITULO_EMPLEO)) ~> aggTituloEmpleo",
 						"OrigenBolsaEmpleo aggregate(groupBy({UBICACIÓN}),",
 						"     registros = countDistinct({UBICACIÓN})) ~> aggUbicacion",
-						"OrigenBolsaEmpleo aggregate(groupBy(FECHA_PUBLICACION),",
-						"     registro = countDistinct(FECHA_PUBLICACION)) ~> aggFecha",
 						"aggContacto sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
@@ -1146,26 +1134,7 @@
 						"     errorHandlingOption: 'stopOnFirstError',",
 						"     mapColumn(",
 						"          UBICACION_NOMBRE = {UBICACIÓN}",
-						"     )) ~> dimUbicacion",
-						"aggFecha sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     input(",
-						"          FECHA as date,",
-						"          ANIO as string,",
-						"          MES as string,",
-						"          DIA as string",
-						"     ),",
-						"     deletable:false,",
-						"     insertable:true,",
-						"     updateable:false,",
-						"     upsertable:false,",
-						"     format: 'table',",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'stopOnFirstError',",
-						"     mapColumn(",
-						"          FECHA = FECHA_PUBLICACION",
-						"     )) ~> dimFecha"
+						"     )) ~> dimUbicacion"
 					]
 				}
 			},
@@ -1182,8 +1151,7 @@
 				"[concat(variables('factoryId'), '/datasets/Destino_DIM_TIPO_EMPLEO')]",
 				"[concat(variables('factoryId'), '/datasets/Destino_DIM_TITULACION')]",
 				"[concat(variables('factoryId'), '/datasets/Destino_DIM_TITULO_EMPLEO')]",
-				"[concat(variables('factoryId'), '/datasets/Destino_DIM_UBICACION')]",
-				"[concat(variables('factoryId'), '/datasets/Destino_DIM_FECHA')]"
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_UBICACION')]"
 			]
 		}
 	]
