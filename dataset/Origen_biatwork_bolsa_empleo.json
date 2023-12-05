@@ -1,5 +1,5 @@
 {
-	"name": "origin_biatwork_bolsa_empleo",
+	"name": "Origen_biatwork_bolsa_empleo",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "blobbiatwork",
