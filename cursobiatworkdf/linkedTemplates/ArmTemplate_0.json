@@ -1,0 +1,156 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "cursobiatworkdf"
+		},
+		"blobbiatwork_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'blobbiatwork'"
+		},
+		"dbbiatwork_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'dbbiatwork'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/blobbiatwork')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Blob Storage para el proyecto final de Bi At Work",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('blobbiatwork_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dbbiatwork')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Linked Services para el proyecto Bi At Work",
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('dbbiatwork_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/origin_biatwork_bolsa_empleo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "blobbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Origen CSV"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "job_descriptions.csv",
+						"container": "cursobiatworkcontainer"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "id",
+						"type": "String"
+					},
+					{
+						"name": "EXPERIENCIA_MINIMA",
+						"type": "String"
+					},
+					{
+						"name": "EXPERIENCIA_MAXIMA",
+						"type": "String"
+					},
+					{
+						"name": "TITULACION",
+						"type": "String"
+					},
+					{
+						"name": "RANGO_SALARIAL_MINIMO",
+						"type": "String"
+					},
+					{
+						"name": "RANGO_SALARIAL_MAXIMO",
+						"type": "String"
+					},
+					{
+						"name": "UBICACIÓN",
+						"type": "String"
+					},
+					{
+						"name": "PAIS",
+						"type": "String"
+					},
+					{
+						"name": "TIPO_EMPLEO",
+						"type": "String"
+					},
+					{
+						"name": "TAMAÑO_COMPAÑIA",
+						"type": "String"
+					},
+					{
+						"name": "FECHA_PUBLICACION",
+						"type": "String"
+					},
+					{
+						"name": "GENERO",
+						"type": "String"
+					},
+					{
+						"name": "CONTACTO_NOMBRE",
+						"type": "String"
+					},
+					{
+						"name": "CONTACTO_NUMERO",
+						"type": "String"
+					},
+					{
+						"name": "TITULO_EMPLEO",
+						"type": "String"
+					},
+					{
+						"name": "ROL",
+						"type": "String"
+					},
+					{
+						"name": "PORTAL_EMPLEO",
+						"type": "String"
+					},
+					{
+						"name": "EMPRESA",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/blobbiatwork')]"
+			]
+		}
+	]
+}
