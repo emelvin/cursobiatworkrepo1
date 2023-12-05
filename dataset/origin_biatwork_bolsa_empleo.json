@@ -1,12 +1,12 @@
 {
-	"name": "input_biatwork_bolsa_empleo",
+	"name": "origin_biatwork_bolsa_empleo",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "blobbiatwork",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Destino"
+			"name": "Origen CSV"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
