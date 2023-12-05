@@ -1,0 +1,29 @@
+{
+	"name": "Destino_DIM_PAIS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PAIS_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PAIS_NOMBRE",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_PAIS"
+		}
+	}
+}

@@ -1,0 +1,39 @@
+{
+	"name": "Destino_DIM_EMPRESA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EMPRESA_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CONTACTO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EMPRESA_NOMBRE",
+				"type": "varchar"
+			},
+			{
+				"name": "EMPRESA_TAMANIO",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_EMPRESA"
+		}
+	}
+}

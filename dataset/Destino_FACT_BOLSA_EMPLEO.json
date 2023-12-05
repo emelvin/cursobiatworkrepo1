@@ -1,0 +1,96 @@
+{
+	"name": "Destino_FACT_BOLSA_EMPLEO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "FECHA_ID",
+				"type": "date"
+			},
+			{
+				"name": "TIPO_EMPLEO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PORTAL_EMPLEO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TITULACION_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TITULO_EMPLEO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ROL_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GENERO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "UBICACION_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PAIS_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EXPERIENCIA_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RANGO_SALARIAL_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EMPRESA_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CONTACTO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EXPERIENCIA_PROMEDIO",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "RANGO_SALARIAL_PROMEDIO",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "FACT",
+			"table": "BIATWORK_BOLSA_EMPLEO"
+		}
+	}
+}

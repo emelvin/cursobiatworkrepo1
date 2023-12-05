@@ -1,0 +1,29 @@
+{
+	"name": "Destino_DIM_TITULO_EMPLEO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "TITULO_EMPLEO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TITULO_EMPLEO_NOMBRE",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_TITULO_EMPLEO"
+		}
+	}
+}

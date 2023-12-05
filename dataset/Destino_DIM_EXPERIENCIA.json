@@ -1,0 +1,35 @@
+{
+	"name": "Destino_DIM_EXPERIENCIA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EXPERIENCIA_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EXPERIENCIA_MINIMO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EXPERIENCIA_MAXIMO",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_EXPERIENCIA"
+		}
+	}
+}

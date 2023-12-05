@@ -1,0 +1,29 @@
+{
+	"name": "Destino_DIM_GENERO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "GENERO_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GENERO_DESCRIPCION",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_GENERO"
+		}
+	}
+}

@@ -1,0 +1,29 @@
+{
+	"name": "Destino_DIM_ROL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ROL_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ROL_NOMBRE",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_ROL"
+		}
+	}
+}

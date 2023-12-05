@@ -1,0 +1,36 @@
+{
+	"name": "Destino_DIM_FECHA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "FECHA",
+				"type": "date"
+			},
+			{
+				"name": "ANIO",
+				"type": "varchar"
+			},
+			{
+				"name": "MES",
+				"type": "varchar"
+			},
+			{
+				"name": "DIA",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_FECHA"
+		}
+	}
+}

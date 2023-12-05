@@ -1,0 +1,35 @@
+{
+	"name": "Destino_DIM_RANGO_SALARIAL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dbbiatwork",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Destino DB"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RANGO_SALARIAL_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RANGO_SALARIAL_MINIMO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RANGO_SALARIAL_MAXIMO",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "DIM",
+			"table": "BIATWORK_RANGO_SALARIAL"
+		}
+	}
+}
