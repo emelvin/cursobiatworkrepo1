@@ -19,11 +19,21 @@
 						"type": "DatasetReference"
 					},
 					"name": "dimContacto"
+				},
+				{
+					"dataset": {
+						"referenceName": "Destino_DIM_EMPRESA",
+						"type": "DatasetReference"
+					},
+					"name": "dimEmpresa"
 				}
 			],
 			"transformations": [
 				{
 					"name": "aggContacto"
+				},
+				{
+					"name": "aggEmpresa"
 				}
 			],
 			"scriptLines": [
@@ -51,7 +61,11 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> OrigenBolsaEmpleo",
 				"OrigenBolsaEmpleo aggregate(groupBy(CONTACTO_NOMBRE,",
-				"          CONTACTO_NUMERO)) ~> aggContacto",
+				"          CONTACTO_NUMERO),",
+				"     registro = countDistinct(CONTACTO_NOMBRE)) ~> aggContacto",
+				"OrigenBolsaEmpleo aggregate(groupBy(EMPRESA,",
+				"          {TAMAÑO_COMPAÑIA}),",
+				"     registros = countDistinct(EMPRESA)) ~> aggEmpresa",
 				"aggContacto sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -63,7 +77,6 @@
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
-				"     truncate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
@@ -71,7 +84,27 @@
 				"     mapColumn(",
 				"          CONTACTO_NOMBRE,",
 				"          CONTACTO_NUMERO",
-				"     )) ~> dimContacto"
+				"     )) ~> dimContacto",
+				"aggEmpresa sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EMPRESA_ID as integer,",
+				"          CONTACTO_ID as integer,",
+				"          EMPRESA_NOMBRE as string,",
+				"          EMPRESA_TAMANIO as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          EMPRESA_NOMBRE = EMPRESA,",
+				"          EMPRESA_TAMANIO = {TAMAÑO_COMPAÑIA}",
+				"     )) ~> dimEmpresa"
 			]
 		}
 	}
