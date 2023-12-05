@@ -21,7 +21,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/origin_biatwork_bolsa_empleo')]",
+			"name": "[concat(parameters('factoryName'), '/Origen_biatwork_bolsa_empleo')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -151,6 +151,704 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_CONTACTO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "CONTACTO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CONTACTO_NOMBRE",
+						"type": "varchar"
+					},
+					{
+						"name": "CONTACTO_NUMERO",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_CONTACTO"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_EMPRESA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "EMPRESA_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CONTACTO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EMPRESA_NOMBRE",
+						"type": "varchar"
+					},
+					{
+						"name": "EMPRESA_TAMANIO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_EMPRESA"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_EXPERIENCIA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "EXPERIENCIA_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EXPERIENCIA_MINIMO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EXPERIENCIA_MAXIMO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_EXPERIENCIA"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_FECHA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FECHA",
+						"type": "date"
+					},
+					{
+						"name": "ANIO",
+						"type": "varchar"
+					},
+					{
+						"name": "MES",
+						"type": "varchar"
+					},
+					{
+						"name": "DIA",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_FECHA"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_GENERO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "GENERO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GENERO_DESCRIPCION",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_GENERO"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_PAIS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "PAIS_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PAIS_NOMBRE",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_PAIS"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_PORTAL_EMPLEO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "PORTAL_EMPLEO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PORTAL_EMPLEO_NOMBRE",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_PORTAL_EMPLEO"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_RANGO_SALARIAL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "RANGO_SALARIAL_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RANGO_SALARIAL_MINIMO",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RANGO_SALARIAL_MAXIMO",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_RANGO_SALARIAL"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_ROL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ROL_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ROL_NOMBRE",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_ROL"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_TIPO_EMPLEO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "TIPO_EMPLEO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TIPO_EMPLEO_DESCRIPCION",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_TIPO_EMPLEO"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_TITULACION')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "TITULACION_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TITULACION_NOMBRE",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_TITULACION"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_TITULO_EMPLEO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "TITULO_EMPLEO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TITULO_EMPLEO_NOMBRE",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_TITULO_EMPLEO"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_DIM_UBICACION')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "UBICACION_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "UBICACION_NOMBRE",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "DIM",
+					"table": "BIATWORK_UBICACION"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Destino_FACT_BOLSA_EMPLEO')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dbbiatwork",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Destino DB"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "FECHA_ID",
+						"type": "date"
+					},
+					{
+						"name": "TIPO_EMPLEO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PORTAL_EMPLEO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TITULACION_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TITULO_EMPLEO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ROL_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GENERO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "UBICACION_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PAIS_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EXPERIENCIA_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RANGO_SALARIAL_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EMPRESA_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CONTACTO_ID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EXPERIENCIA_PROMEDIO",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "RANGO_SALARIAL_PROMEDIO",
+						"type": "decimal",
+						"precision": 10,
+						"scale": 2
+					}
+				],
+				"typeProperties": {
+					"schema": "FACT",
+					"table": "BIATWORK_BOLSA_EMPLEO"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/dbbiatwork')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Origen_biatwork_bolsa_empleo",
+								"type": "DatasetReference"
+							},
+							"name": "OrigenBolsaEmpleo"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_CONTACTO",
+								"type": "DatasetReference"
+							},
+							"name": "dimContacto"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_EMPRESA",
+								"type": "DatasetReference"
+							},
+							"name": "dimEmpresa"
+						}
+					],
+					"transformations": [
+						{
+							"name": "aggContacto"
+						},
+						{
+							"name": "aggEmpresa"
+						},
+						{
+							"name": "aggregate1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          id as string,",
+						"          EXPERIENCIA_MINIMA as string,",
+						"          EXPERIENCIA_MAXIMA as string,",
+						"          TITULACION as string,",
+						"          RANGO_SALARIAL_MINIMO as string,",
+						"          RANGO_SALARIAL_MAXIMO as string,",
+						"          {UBICACIÓN} as string,",
+						"          PAIS as string,",
+						"          TIPO_EMPLEO as string,",
+						"          {TAMAÑO_COMPAÑIA} as string,",
+						"          FECHA_PUBLICACION as string,",
+						"          GENERO as string,",
+						"          CONTACTO_NOMBRE as string,",
+						"          CONTACTO_NUMERO as string,",
+						"          TITULO_EMPLEO as string,",
+						"          ROL as string,",
+						"          PORTAL_EMPLEO as string,",
+						"          EMPRESA as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> OrigenBolsaEmpleo",
+						"OrigenBolsaEmpleo aggregate(groupBy(CONTACTO_NOMBRE,",
+						"          CONTACTO_NUMERO),",
+						"     registro = countDistinct(CONTACTO_NOMBRE)) ~> aggContacto",
+						"OrigenBolsaEmpleo aggregate(groupBy(EMPRESA,",
+						"          {TAMAÑO_COMPAÑIA}),",
+						"     registros = countDistinct(EMPRESA)) ~> aggEmpresa",
+						"OrigenBolsaEmpleo aggregate() ~> aggregate1",
+						"aggContacto sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          CONTACTO_ID as integer,",
+						"          CONTACTO_NOMBRE as string,",
+						"          CONTACTO_NUMERO as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          CONTACTO_NOMBRE,",
+						"          CONTACTO_NUMERO",
+						"     )) ~> dimContacto",
+						"aggEmpresa sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          EMPRESA_ID as integer,",
+						"          CONTACTO_ID as integer,",
+						"          EMPRESA_NOMBRE as string,",
+						"          EMPRESA_TAMANIO as integer",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          EMPRESA_NOMBRE = EMPRESA,",
+						"          EMPRESA_TAMANIO = {TAMAÑO_COMPAÑIA}",
+						"     )) ~> dimEmpresa"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Origen_biatwork_bolsa_empleo')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_CONTACTO')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_EMPRESA')]"
+			]
 		}
 	]
 }
