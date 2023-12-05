@@ -758,6 +758,83 @@
 								"type": "DatasetReference"
 							},
 							"name": "dimEmpresa"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_EXPERIENCIA",
+								"type": "DatasetReference"
+							},
+							"name": "dimExperiencia"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_GENERO",
+								"type": "DatasetReference"
+							},
+							"name": "dimGenero"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_PAIS",
+								"type": "DatasetReference"
+							},
+							"name": "dimPais"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_PORTAL_EMPLEO",
+								"type": "DatasetReference"
+							},
+							"name": "dimPortalEmpleo"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_RANGO_SALARIAL",
+								"type": "DatasetReference"
+							},
+							"name": "dimRangoSalarial"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_ROL",
+								"type": "DatasetReference"
+							},
+							"name": "dimRol"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_TIPO_EMPLEO",
+								"type": "DatasetReference"
+							},
+							"name": "dimTipoEmpleo"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_TITULACION",
+								"type": "DatasetReference"
+							},
+							"name": "dimTitulacion"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_TITULO_EMPLEO",
+								"type": "DatasetReference"
+							},
+							"name": "dimTituloEmpleo"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_UBICACION",
+								"type": "DatasetReference"
+							},
+							"name": "dimUbicacion"
+						},
+						{
+							"dataset": {
+								"referenceName": "Destino_DIM_FECHA",
+								"type": "DatasetReference"
+							},
+							"name": "dimFecha"
 						}
 					],
 					"transformations": [
@@ -768,7 +845,37 @@
 							"name": "aggEmpresa"
 						},
 						{
-							"name": "aggregate1"
+							"name": "aggExperiencia"
+						},
+						{
+							"name": "aggGenero"
+						},
+						{
+							"name": "aggPais"
+						},
+						{
+							"name": "aggPortalEmpleo"
+						},
+						{
+							"name": "aggRangoSalarial"
+						},
+						{
+							"name": "aggRol"
+						},
+						{
+							"name": "aggTipoEmpleo"
+						},
+						{
+							"name": "aggTitulacion"
+						},
+						{
+							"name": "aggTituloEmpleo"
+						},
+						{
+							"name": "aggUbicacion"
+						},
+						{
+							"name": "aggFecha"
 						}
 					],
 					"scriptLines": [
@@ -801,7 +908,32 @@
 						"OrigenBolsaEmpleo aggregate(groupBy(EMPRESA,",
 						"          {TAMAÑO_COMPAÑIA}),",
 						"     registros = countDistinct(EMPRESA)) ~> aggEmpresa",
-						"OrigenBolsaEmpleo aggregate() ~> aggregate1",
+						"OrigenBolsaEmpleo aggregate(groupBy(EXPERIENCIA_MINIMA,",
+						"          EXPERIENCIA_MAXIMA,",
+						"          id),",
+						"     registro = countDistinct(id)) ~> aggExperiencia",
+						"OrigenBolsaEmpleo aggregate(groupBy(GENERO),",
+						"     registro = countDistinct(GENERO)) ~> aggGenero",
+						"OrigenBolsaEmpleo aggregate(groupBy(PAIS),",
+						"     registros = countDistinct(PAIS)) ~> aggPais",
+						"OrigenBolsaEmpleo aggregate(groupBy(PORTAL_EMPLEO),",
+						"     registros = countDistinct(PORTAL_EMPLEO)) ~> aggPortalEmpleo",
+						"OrigenBolsaEmpleo aggregate(groupBy(RANGO_SALARIAL_MINIMO,",
+						"          RANGO_SALARIAL_MAXIMO,",
+						"          id),",
+						"     registros = countDistinct(id)) ~> aggRangoSalarial",
+						"OrigenBolsaEmpleo aggregate(groupBy(ROL),",
+						"     registros = countDistinct(ROL)) ~> aggRol",
+						"OrigenBolsaEmpleo aggregate(groupBy(TIPO_EMPLEO),",
+						"     registros = countDistinct(TIPO_EMPLEO)) ~> aggTipoEmpleo",
+						"OrigenBolsaEmpleo aggregate(groupBy(TITULACION),",
+						"     registros = countDistinct(TITULACION)) ~> aggTitulacion",
+						"OrigenBolsaEmpleo aggregate(groupBy(TITULO_EMPLEO),",
+						"     registros = countDistinct(TITULO_EMPLEO)) ~> aggTituloEmpleo",
+						"OrigenBolsaEmpleo aggregate(groupBy({UBICACIÓN}),",
+						"     registros = countDistinct({UBICACIÓN})) ~> aggUbicacion",
+						"OrigenBolsaEmpleo aggregate(groupBy(FECHA_PUBLICACION),",
+						"     registro = countDistinct(FECHA_PUBLICACION)) ~> aggFecha",
 						"aggContacto sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
@@ -840,14 +972,218 @@
 						"     mapColumn(",
 						"          EMPRESA_NOMBRE = EMPRESA,",
 						"          EMPRESA_TAMANIO = {TAMAÑO_COMPAÑIA}",
-						"     )) ~> dimEmpresa"
+						"     )) ~> dimEmpresa",
+						"aggExperiencia sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          EXPERIENCIA_ID as integer,",
+						"          EXPERIENCIA_MINIMO as integer,",
+						"          EXPERIENCIA_MAXIMO as integer",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          EXPERIENCIA_MINIMO = EXPERIENCIA_MINIMA,",
+						"          EXPERIENCIA_MAXIMO = EXPERIENCIA_MAXIMA",
+						"     )) ~> dimExperiencia",
+						"aggGenero sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          GENERO_ID as integer,",
+						"          GENERO_DESCRIPCION as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          GENERO_DESCRIPCION = GENERO",
+						"     )) ~> dimGenero",
+						"aggPais sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          PAIS_ID as integer,",
+						"          PAIS_NOMBRE as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          PAIS_NOMBRE = PAIS",
+						"     )) ~> dimPais",
+						"aggPortalEmpleo sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          PORTAL_EMPLEO_ID as integer,",
+						"          PORTAL_EMPLEO_NOMBRE as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          PORTAL_EMPLEO_NOMBRE = PORTAL_EMPLEO",
+						"     )) ~> dimPortalEmpleo",
+						"aggRangoSalarial sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          RANGO_SALARIAL_ID as integer,",
+						"          RANGO_SALARIAL_MINIMO as integer,",
+						"          RANGO_SALARIAL_MAXIMO as integer",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          RANGO_SALARIAL_MINIMO,",
+						"          RANGO_SALARIAL_MAXIMO",
+						"     )) ~> dimRangoSalarial",
+						"aggRol sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          ROL_ID as integer,",
+						"          ROL_NOMBRE as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          ROL_NOMBRE = ROL",
+						"     )) ~> dimRol",
+						"aggTipoEmpleo sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          TIPO_EMPLEO_ID as integer,",
+						"          TIPO_EMPLEO_DESCRIPCION as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          TIPO_EMPLEO_DESCRIPCION = TIPO_EMPLEO",
+						"     )) ~> dimTipoEmpleo",
+						"aggTitulacion sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          TITULACION_ID as integer,",
+						"          TITULACION_NOMBRE as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          TITULACION_NOMBRE = TITULACION",
+						"     )) ~> dimTitulacion",
+						"aggTituloEmpleo sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          TITULO_EMPLEO_ID as integer,",
+						"          TITULO_EMPLEO_NOMBRE as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          TITULO_EMPLEO_NOMBRE = TITULO_EMPLEO",
+						"     )) ~> dimTituloEmpleo",
+						"aggUbicacion sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          UBICACION_ID as integer,",
+						"          UBICACION_NOMBRE as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          UBICACION_NOMBRE = {UBICACIÓN}",
+						"     )) ~> dimUbicacion",
+						"aggFecha sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          FECHA as date,",
+						"          ANIO as string,",
+						"          MES as string,",
+						"          DIA as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          FECHA = FECHA_PUBLICACION",
+						"     )) ~> dimFecha"
 					]
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Origen_biatwork_bolsa_empleo')]",
 				"[concat(variables('factoryId'), '/datasets/Destino_DIM_CONTACTO')]",
-				"[concat(variables('factoryId'), '/datasets/Destino_DIM_EMPRESA')]"
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_EMPRESA')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_EXPERIENCIA')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_GENERO')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_PAIS')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_PORTAL_EMPLEO')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_RANGO_SALARIAL')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_ROL')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_TIPO_EMPLEO')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_TITULACION')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_TITULO_EMPLEO')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_UBICACION')]",
+				"[concat(variables('factoryId'), '/datasets/Destino_DIM_FECHA')]"
 			]
 		}
 	]
