@@ -201,7 +201,7 @@
 				"OrigenBolsaEmpleo aggregate(groupBy({UBICACIÓN}),",
 				"     registros = countDistinct({UBICACIÓN})) ~> aggUbicacion",
 				"OrigenBolsaEmpleo aggregate(groupBy(FECHA_PUBLICACION),",
-				"     registro = countDistinct(FECHA_PUBLICACION)) ~> aggFecha",
+				"     registro = toString(FECHA_PUBLICACION)) ~> aggFecha",
 				"aggContacto sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
