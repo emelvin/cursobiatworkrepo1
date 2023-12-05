@@ -12,7 +12,15 @@
 					"name": "OrigenBolsaEmpleo"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Destino_DIM_CONTACTO",
+						"type": "DatasetReference"
+					},
+					"name": "dimContacto"
+				}
+			],
 			"transformations": [
 				{
 					"name": "aggContacto"
@@ -44,7 +52,27 @@
 				"     ignoreNoFilesFound: false) ~> OrigenBolsaEmpleo",
 				"OrigenBolsaEmpleo aggregate(groupBy(CONTACTO_NOMBRE,",
 				"          CONTACTO_NUMERO),",
-				"     registro = countDistinct(CONTACTO_ID)) ~> aggContacto"
+				"     registro = ERROR_FUNCTION('')) ~> aggContacto",
+				"aggContacto sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CONTACTO_ID as integer,",
+				"          CONTACTO_NOMBRE as string,",
+				"          CONTACTO_NUMERO as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CONTACTO_NOMBRE,",
+				"          CONTACTO_NUMERO",
+				"     )) ~> dimContacto"
 			]
 		}
 	}
